@@ -4,6 +4,7 @@
 *.app
 *.o
 *.obj
+*.zip
 
 # Dynamic runtime database files
 bank.dat*
