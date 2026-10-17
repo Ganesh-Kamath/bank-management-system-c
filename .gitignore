@@ -1,0 +1,15 @@
+# Binary executables
+*.exe
+*.out
+*.app
+*.o
+*.obj
+
+# Dynamic runtime database files
+bank.dat*
+
+# IDE & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
