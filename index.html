@@ -504,8 +504,7 @@
     // --------------------------------------------------------------------------
     // SecureBank Student Controller (Vanilla JS communicating with C REST Engine)
     // --------------------------------------------------------------------------
-    const API_BASE = (window.location.protocol === 'file:' || window.location.port !== '8080')
-      ? 'http://127.0.0.1:8080' : '';
+    const API_BASE = window.location.protocol === 'file:' ? 'http://127.0.0.1:8080' : '';
     let sessionToken = sessionStorage.getItem('token') || null;
     let userRole = null;
     let currentAccount = null;
@@ -518,7 +517,10 @@
     }
 
     async function api(path, method = 'GET', body = null) {
-      const headers = { 'Content-Type': 'application/json' };
+      const headers = { 
+        'Content-Type': 'application/json',
+        'Bypass-Tunnel-Reminder': 'true'
+      };
       if (sessionToken) headers['X-Session-Token'] = sessionToken;
       try {
         const res = await fetch(`${API_BASE}${path}`, {
