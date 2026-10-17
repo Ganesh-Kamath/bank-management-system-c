@@ -1332,10 +1332,36 @@ int main(int argc, char *argv[]) {
         setsockopt(client, SOL_SOCKET, SO_SNDTIMEO, (const char *)&sock_tv, sizeof(sock_tv));
 #endif
 
-        char buffer[16384];
-        int bytes_received = recv(client, buffer, sizeof(buffer) - 1, 0);
-        if (bytes_received > 0) {
-            buffer[bytes_received] = '\0';
+        /* Read complete HTTP request including body */
+        char buffer[32768];
+        int total_read = 0;
+        int expected_len = -1;
+
+        while (total_read < (int)sizeof(buffer) - 1) {
+            int n_read = recv(client, buffer + total_read, (int)sizeof(buffer) - 1 - total_read, 0);
+            if (n_read <= 0) break;
+            total_read += n_read;
+            buffer[total_read] = '\0';
+
+            char *hdr_end = strstr(buffer, "\r\n\r\n");
+            if (hdr_end) {
+                if (expected_len < 0) {
+                    char *cl = strstr(buffer, "Content-Length:");
+                    if (!cl) cl = strstr(buffer, "content-length:");
+                    if (cl) {
+                        expected_len = atoi(cl + 15);
+                    } else {
+                        expected_len = 0;
+                    }
+                }
+                int body_len = total_read - (int)(hdr_end + 4 - buffer);
+                if (body_len >= expected_len) {
+                    break;
+                }
+            }
+        }
+
+        if (total_read > 0) {
             handle_client_request(client, buffer);
         }
         close_socket(client);
