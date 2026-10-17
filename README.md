@@ -95,7 +95,6 @@ This project bridges **core systems programming in C** with a **modern web exper
 | [`start_tunnel.bat`](file:///c:/Users/kamat/Desktop/College/start_tunnel.bat) | Batch Script | 1-click launcher for public sharing over localtunnel (`wicked-candies-knock`). |
 | [`instructions.md`](file:///c:/Users/kamat/Desktop/College/instructions.md) | Markdown | Quick-start cheat-sheet for running and presenting the project. |
 | [`README.md`](file:///c:/Users/kamat/Desktop/College/README.md) | Markdown | This complete educational reference and viva preparation manual. |
-| [`Dockerfile`](file:///c:/Users/kamat/Desktop/College/Dockerfile) | Config | Docker container configuration for cloud deployment (Render/Railway). |
 
 ---
 

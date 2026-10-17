@@ -116,6 +116,5 @@ College/
 ├── run.bat              # 1-click launcher for Windows
 ├── start_tunnel.bat     # 1-click public tunnel for mobile sharing
 ├── README.md            # Comprehensive technical manual & viva guide
-├── instructions.md      # This quick-start guide
-└── Dockerfile           # Optional cloud deployment configuration
+└── instructions.md      # This quick-start guide
 ```
