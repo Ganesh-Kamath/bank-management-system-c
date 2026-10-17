@@ -4463,14 +4463,6 @@ static void run_http_server(Bank *b, const char *host, int port) {
     printf("  (Press Ctrl+C to stop the server)\n\n");
     fflush(stdout);
 
-#ifdef _WIN32
-    system("start http://127.0.0.1:8080");
-#elif defined(__APPLE__)
-    system("open http://127.0.0.1:8080");
-#else
-    system("xdg-open http://127.0.0.1:8080 >/dev/null 2>&1 &");
-#endif
-
     while (g_server_running) {
         struct sockaddr_in client_addr;
         socklen_t client_len = sizeof(client_addr);
@@ -4479,6 +4471,18 @@ static void run_http_server(Bank *b, const char *host, int port) {
             if (!g_server_running) break;
             continue;
         }
+
+#ifdef _WIN32
+        DWORD sock_to = 3000;
+        setsockopt(client, SOL_SOCKET, SO_RCVTIMEO, (const char *)&sock_to, sizeof(sock_to));
+        setsockopt(client, SOL_SOCKET, SO_SNDTIMEO, (const char *)&sock_to, sizeof(sock_to));
+#else
+        struct timeval sock_tv;
+        sock_tv.tv_sec = 3;
+        sock_tv.tv_usec = 0;
+        setsockopt(client, SOL_SOCKET, SO_RCVTIMEO, (const char *)&sock_tv, sizeof(sock_tv));
+        setsockopt(client, SOL_SOCKET, SO_SNDTIMEO, (const char *)&sock_tv, sizeof(sock_tv));
+#endif
 
         /* Read complete HTTP request including body */
         char req_buf[65536];
