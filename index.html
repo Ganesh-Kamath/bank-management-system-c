@@ -23,9 +23,9 @@
     .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
     
     /* Header */
-    header { background: #0b1120; border-bottom: 1px solid var(--border); padding: 16px 0; margin-bottom: 24px; }
+    header { background: #0b1120; border-bottom: 1px solid var(--border); padding: 14px 0; margin-bottom: 20px; }
     .nav { display: flex; justify-content: space-between; align-items: center; }
-    .brand { font-size: 20px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 8px; }
+    .brand { font-size: 19px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 8px; }
     .brand span { color: var(--primary); }
     .badge { padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; text-transform: uppercase; }
     .badge-c { background: #1e3a8a; color: #93c5fd; }
@@ -33,8 +33,8 @@
     .badge-danger { background: #7f1d1d; color: #fca5a5; }
     .badge-warning { background: #78350f; color: #fde68a; }
 
-    /* Buttons & Inputs */
-    .btn { background: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer; transition: 0.2s; }
+    /* Buttons & Inputs (Touch friendly on mobile) */
+    .btn { background: var(--primary); color: white; border: none; padding: 9px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer; transition: 0.2s; touch-action: manipulation; }
     .btn:hover { background: var(--primary-hover); }
     .btn-secondary { background: var(--card-hover); color: var(--text); border: 1px solid var(--border); }
     .btn-secondary:hover { background: #475569; }
@@ -42,8 +42,8 @@
     .btn-danger:hover { background: #dc2626; }
     .btn-success { background: var(--success); }
     .btn-success:hover { background: #059669; }
-    .btn-sm { padding: 4px 10px; font-size: 12px; }
-    input, select { width: 100%; padding: 10px 12px; background: #090d16; border: 1px solid var(--border); border-radius: 6px; color: white; font-size: 14px; margin-top: 4px; }
+    .btn-sm { padding: 6px 12px; font-size: 13px; }
+    input, select { width: 100%; padding: 11px 12px; background: #090d16; border: 1px solid var(--border); border-radius: 6px; color: white; font-size: 16px; margin-top: 4px; }
     input:focus, select:focus { outline: none; border-color: var(--primary); }
     label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
     .form-group { margin-bottom: 14px; }
@@ -56,10 +56,11 @@
     .stat-val { font-size: 24px; font-weight: 700; color: var(--text); font-family: monospace; }
     .stat-sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
 
-    /* Tables */
-    table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+    /* Tables & Touch Scrolling */
+    .table-container { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 10px; border-radius: 6px; }
+    table { width: 100%; min-width: 580px; border-collapse: collapse; font-size: 13px; }
     th, td { padding: 10px; text-align: left; border-bottom: 1px solid #334155; }
-    th { color: var(--text-muted); font-weight: 600; background: #131c2e; }
+    th { color: var(--text-muted); font-weight: 600; background: #131c2e; white-space: nowrap; }
     tr:hover { background: #243248; }
     .font-mono { font-family: monospace; }
 
@@ -69,15 +70,35 @@
     .alert-success { background: #064e3b; border: 1px solid #047857; color: #6ee7b7; }
     .alert-info { background: #172554; border: 1px solid #1e40af; color: #93c5fd; }
     .hidden { display: none !important; }
-    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 100; }
-    .modal { background: var(--card); border: 1px solid var(--border); border-radius: 10px; width: 90%; max-width: 480px; padding: 20px; }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 12px; }
+    .modal { background: var(--card); border: 1px solid var(--border); border-radius: 10px; width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
     .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
     .modal-title { font-size: 16px; font-weight: 600; }
-    .modal-close { background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; }
-    .tab-bar { display: flex; gap: 8px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
-    .tab-btn { background: none; border: none; color: var(--text-muted); padding: 8px 16px; font-weight: 500; cursor: pointer; border-bottom: 2px solid transparent; }
+    .modal-close { background: none; border: none; color: var(--text-muted); font-size: 24px; line-height: 1; cursor: pointer; padding: 4px; }
+    .tab-bar { display: flex; gap: 8px; border-bottom: 1px solid var(--border); margin-bottom: 16px; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+    .tab-btn { background: none; border: none; color: var(--text-muted); padding: 8px 16px; font-weight: 500; cursor: pointer; border-bottom: 2px solid transparent; flex-shrink: 0; }
     .tab-btn.active { color: var(--primary); border-color: var(--primary); }
-    .toast { position: fixed; bottom: 20px; right: 20px; padding: 12px 20px; border-radius: 8px; background: #1e293b; border: 1px solid var(--border); color: white; font-size: 14px; z-index: 200; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+    .toast { position: fixed; bottom: 20px; right: 20px; padding: 12px 20px; border-radius: 8px; background: #1e293b; border: 1px solid var(--border); color: white; font-size: 14px; z-index: 200; box-shadow: 0 4px 12px rgba(0,0,0,0.5); max-width: calc(100vw - 40px); }
+
+    /* Mobile Responsive Optimizations */
+    @media (max-width: 768px) {
+      .container { padding: 0 12px; }
+      header { padding: 10px 0; margin-bottom: 14px; }
+      .brand { font-size: 17px; }
+      .badge-c { display: none; }
+      .grid-2 { grid-template-columns: 1fr; gap: 14px; }
+      .grid-4 { grid-template-columns: 1fr; gap: 10px; margin-bottom: 16px; }
+      .card { padding: 14px; border-radius: 8px; }
+      .card-title { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .stat-val { font-size: 22px; }
+      .btn { min-height: 42px; font-size: 14px; }
+      .btn-sm { min-height: 36px; font-size: 13px; }
+      .tab-bar { gap: 4px; padding-bottom: 6px; }
+      .tab-btn { padding: 8px 12px; font-size: 13px; }
+      .action-btns { display: flex; flex-wrap: wrap; gap: 6px; }
+      .action-btns .btn { flex: 1 1 calc(33.33% - 6px); }
+      #adm-search { max-width: 100% !important; margin-bottom: 8px; }
+    }
   </style>
 </head>
 <body>
@@ -153,7 +174,7 @@
         </div>
         <div class="card">
           <div class="stat-sub">Quick Actions</div>
-          <div style="display:flex; gap:6px; margin-top:8px;">
+          <div class="action-btns">
             <button class="btn btn-sm" onclick="openModal('modal-deposit')">Deposit</button>
             <button class="btn btn-sm btn-secondary" onclick="openModal('modal-withdraw')">Withdraw</button>
             <button class="btn btn-sm btn-secondary" onclick="openModal('modal-transfer')">Transfer</button>
@@ -161,7 +182,7 @@
         </div>
         <div class="card">
           <div class="stat-sub">Account Services</div>
-          <div style="display:flex; gap:6px; margin-top:8px;">
+          <div class="action-btns">
             <button class="btn btn-sm btn-secondary" onclick="openModal('modal-fd')">Fixed Deposits</button>
             <button class="btn btn-sm btn-secondary" onclick="openModal('modal-loan')">Loans</button>
             <button class="btn btn-sm btn-secondary" onclick="openModal('modal-pin')">PIN</button>
@@ -175,22 +196,24 @@
           <span>Recent Transactions (Immutable Ledger)</span>
           <button class="btn btn-secondary btn-sm" onclick="downloadStatement()">Download CSV Statement</button>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Date & Time</th>
-              <th>Type</th>
-              <th>Counterparty</th>
-              <th>Amount</th>
-              <th>Balance After</th>
-              <th>Note</th>
-            </tr>
-          </thead>
-          <tbody id="cust-txns">
-            <tr><td colspan="7" style="text-align:center; color:var(--text-muted);">Loading transactions from C core...</td></tr>
-          </tbody>
-        </table>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Date & Time</th>
+                <th>Type</th>
+                <th>Counterparty</th>
+                <th>Amount</th>
+                <th>Balance After</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody id="cust-txns">
+              <tr><td colspan="7" style="text-align:center; color:var(--text-muted);">Loading transactions from C core...</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
@@ -232,43 +255,47 @@
 
         <!-- Tab 1: All Accounts -->
         <div id="tab-accs">
-          <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
             <input type="text" id="adm-search" placeholder="Search account number, name, phone..." style="max-width:320px;" oninput="loadAdminAccounts(this.value)">
             <button class="btn btn-secondary btn-sm" onclick="loadAdminDashboard()">Refresh</button>
           </div>
-          <table>
-            <thead>
-              <tr>
-                <th>Account #</th>
-                <th>Holder Name</th>
-                <th>Phone</th>
-                <th>Type</th>
-                <th>Status</th>
-                <th>Balance</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="adm-tbody-accs"></tbody>
-          </table>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Account #</th>
+                  <th>Holder Name</th>
+                  <th>Phone</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th>Balance</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adm-tbody-accs"></tbody>
+            </table>
+          </div>
         </div>
 
         <!-- Tab 2: Pending Loans -->
         <div id="tab-loans" class="hidden">
-          <table>
-            <thead>
-              <tr>
-                <th>Loan ID</th>
-                <th>Account</th>
-                <th>Applicant</th>
-                <th>Principal</th>
-                <th>Tenor</th>
-                <th>Rate</th>
-                <th>Monthly EMI</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="adm-tbody-loans"></tbody>
-          </table>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Loan ID</th>
+                  <th>Account</th>
+                  <th>Applicant</th>
+                  <th>Principal</th>
+                  <th>Tenor</th>
+                  <th>Rate</th>
+                  <th>Monthly EMI</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adm-tbody-loans"></tbody>
+            </table>
+          </div>
         </div>
 
         <!-- Tab 3: Open Account -->
@@ -319,19 +346,21 @@
 
         <!-- Tab 5: Audit Log -->
         <div id="tab-audit" class="hidden">
-          <table>
-            <thead>
-              <tr>
-                <th>Timestamp</th>
-                <th>Actor</th>
-                <th>IP</th>
-                <th>Action</th>
-                <th>Status</th>
-                <th>Details</th>
-              </tr>
-            </thead>
-            <tbody id="adm-tbody-audit"></tbody>
-          </table>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Actor</th>
+                  <th>IP</th>
+                  <th>Action</th>
+                  <th>Status</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody id="adm-tbody-audit"></tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
